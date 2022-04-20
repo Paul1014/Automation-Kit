@@ -17,6 +17,7 @@ Create user
 "
 sudo useradd librenms -d /opt/librenms -M -r -s "$(which bash)"
 
+echo "done"
 #Download LibreNMS
 echo "
 ----------------
@@ -26,6 +27,7 @@ Download LibreNMS
 cd /opt
 git clone https://github.com/librenms/librenms.git
 
+echo "done"
 #Set Permissions
 echo "
 ----------------
@@ -36,7 +38,7 @@ sudo chown -R librenms:librenms /opt/librenms
 sudo chmod 771 /opt/librenms
 sudo setfacl -d -m g::rwx /opt/librenms/rrd /opt/librenms/logs /opt/librenms/bootstrap/cache/ /opt/librenms/storage/
 sudo setfacl -R -m g::rwx /opt/librenms/rrd /opt/librenms/logs /opt/librenms/bootstrap/cache/ /opt/librenms/storage/
-
+echo "done"
 #Install PHP dependencies
 echo "
 ----------------
@@ -46,7 +48,7 @@ Install PHP dependencies
 sudo su librenms -c "php /opt/librenms/scripts/composer_wrapper.php install --no-dev"
 
 
-
+echo "done"
 #set php timezone
 echo "
 ----------------
@@ -59,7 +61,7 @@ sudo echo date.timezone = \"Asia/Taipei\" >> /etc/php/7.4/cli/php.ini
 #set system time zone
 sudo timedatectl set-timezone Asia/Taipei
 
-
+echo "done"
 #Configure MariaDB
 echo "
 ----------------
@@ -78,7 +80,7 @@ sudo mysql -uroot <<EOF
 	exit
 EOF
 
-
+echo "done"
 #Configure PHP-FPM
 echo "
 ----------------
@@ -92,7 +94,7 @@ sudo sed -i 's/group \= www-data/group = librenms/g' /etc/php/7.4/fpm/pool.d/lib
 sudo sed -i 's/php\/php7.4-fpm.sock/php-fpm-librenms.sock/g' /etc/php/7.4/fpm/pool.d/librenms.conf
 
 sudo systemctl restart php7.4-fpm
-
+echo "done"
 # Weber server
 echo "
 ----------------
@@ -126,7 +128,7 @@ sudo a2enmod proxy_fcgi setenvif rewrite
 sudo a2ensite librenms.conf
 sudo systemctl restart apache2
 sudo systemctl restart php7.4-fpm
-
+echo "done"
 #Enable lnms
 echo "
 ----------------
@@ -136,7 +138,7 @@ Enable Lnms
 sudo ln -s /opt/librenms/lnms /usr/bin/lnms
 sudo cp /opt/librenms/misc/lnms-completion.bash /etc/bash_completion.d/
 
-
+echo "done"
 #Cron job
 echo "
 ----------------
@@ -144,7 +146,7 @@ Cron job
 ----------------
 "
 sudo cp /opt/librenms/librenms.nonroot.cron /etc/cron.d/librenms
-
+echo "done"
 #Copy logrotate config
 echo "
 ----------------
@@ -153,4 +155,4 @@ Copy logrotate config
 "
 sudo cp /opt/librenms/misc/librenms.logrotate /etc/logrotate.d/librenms
 
-echo "Install librenms compelete, please browser your web site"
+echo "Install libreNMS is complete, please browse the web page"
