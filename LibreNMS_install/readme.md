@@ -1,6 +1,7 @@
 # 自動安裝LibreNMS腳本
 
 ## Install_Ubuntu
+系統資訊:
 OS version: Ubuntu 20.04 LTS  
 PHP version: 7.4  
 Web: Apache2  
