@@ -7,7 +7,7 @@ Web: Apache2
 Database: MariaDB  
 timezone: Asia/Taipei  
 
-安裝步驟:
+安裝步驟:  
 ```
 git clone https://github.com/Paul1014/Automation-Kit
 cd ./Automation_Kit/LibreNMS_install
